@@ -1,0 +1,52 @@
+create table users(
+    id varchar2(30) primary key,
+    pw varchar2(30) not null,
+    name varchar2(30) not null,
+    email varchar2(30),
+    address varchar2(100),
+    regdate date default sysdate
+);
+
+CREATE TABLE BOARD(
+    BNO NUMBER(10) PRIMARY KEY,
+    WRITER VARCHAR2(50) NOT NULL,
+    TITLE VARCHAR2(300) NOT NULL,
+    CONTENT VARCHAR2(2000),
+    REGDATE DATE DEFAULT SYSDATE,
+    HIT NUMBER(10) DEFAULT 0
+    
+);
+CREATE SEQUENCE BOARD_SEQ INCREMENT BY 1 START WITH 1 NOCACHE;
+
+--
+--declare     
+--    var1 number := 1;
+--begin 
+--
+--    while var1 <= 300
+--    loop
+--        insert into board(bno, writer, title, content) 
+--        values (board_seq.nextval, 'test'||var1, 'test' || var1, 'test'||var1);
+--
+--        var1 := var1 + 1;    
+--    end loop;
+--    
+--    commit;
+--    
+--end;
+
+
+
+--
+select *
+from(select rownum as rn, 
+            a.*
+       from(select * 
+            from board 
+            order by bno desc) a
+)
+where rn >10 and rn <= 20;
+
+select count(*) as total from board;
+
+select*from bbs;
